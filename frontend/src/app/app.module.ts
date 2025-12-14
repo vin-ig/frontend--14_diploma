@@ -9,6 +9,7 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from "@angular/material/menu";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import {MatMenuModule} from "@angular/material/menu";
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         MatMenuModule,
         AppRoutingModule,
         BrowserAnimationsModule,
