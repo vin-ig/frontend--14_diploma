@@ -1,0 +1,54 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .container {
+        @include d-flex-between;
+
+        .logo {
+            width: 85px;
+            //margin-right: 100px;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .header-menu {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: $dark-blue-text-color;
+            margin-right: 157px;
+
+            ul {
+                @include d-flex-between;
+                width: 430px;
+                list-style: none;
+                padding: 0;
+            }
+        }
+
+        .header-contacts {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: $light-blue-text-color;
+        }
+
+        .header-actions {
+            //width: 230px;
+            margin-left: 20px;
+            @include d-flex;
+
+            svg {
+                margin-right: 7px;
+            }
+
+            a {
+                color: $dark-blue-text-color;
+            }
+        }
+    }
+}
