@@ -1,0 +1,80 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.footer {
+    background-color: #B9D5FD;
+    padding-top: 40px;
+    padding-bottom: 54px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+
+    .container {
+        .footer-top {
+            margin-bottom: 40px;
+            @include d-flex;
+
+            .logo {
+                width: 85px;
+                margin-right: 40px;
+
+                img {
+                    max-width: 100%;
+                }
+            }
+
+            .footer-menu {
+                font-weight: 400;
+
+                ul {
+                    @include d-flex;
+                    list-style: none;
+                    padding: 0;
+
+                    li {
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+
+        .footer-middle {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 60px;
+
+            .footer-middle-item-head {
+                font-weight: 500;
+                color: $light-blue-color;
+                margin-bottom: 10px;
+            }
+
+            .footer-middle-item-body {
+                font-weight: 400;
+                color: $dark-blue-text-color;
+                max-width: 260px;
+
+                p {
+                    margin: 0;
+                }
+
+                .button {
+                    padding: 10px;
+                    width: 153px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin-top: 10px;
+                }
+
+                a {
+                    margin-right: 12px;
+                }
+            }
+        }
+
+        .footer-bottom {
+            font-weight: 400;
+            color: $light-blue-color;
+        }
+    }
+}
