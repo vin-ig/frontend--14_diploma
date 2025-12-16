@@ -1,0 +1,64 @@
+<section class="modal-overlay" *ngIf="modalType">
+    <div class="modal" [formGroup]="modalForm">
+        <div class="close-modal" (click)="closeModal()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="1.93562" y1="2.6499" x2="13.9564" y2="14.6707" stroke="#BEBEBE" stroke-linecap="round"/>
+                <line x1="13.9236" y1="2.62971" x2="1.90277" y2="14.6505" stroke="#BEBEBE" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <div [ngSwitch]="modalType">
+            <div *ngSwitchCase="modalTypes.order" class="auth-form">
+                <div class="auth-title">Заявка на услугу</div>
+
+                <div class="auth-inputs">
+                    <div class="auth-input">
+                        <input type="text" class="input" placeholder="Категория" formControlName="category"
+                        [ngStyle]="{'border-color': category?.invalid && (category?.dirty || category?.touched) ? 'red' : ''}">
+                    </div>
+                    <div class="auth-input">
+                        <input type="text" class="input" placeholder="Ваше имя" formControlName="name"
+                        [ngStyle]="{'border-color': name?.invalid && (name?.dirty || name?.touched) ? 'red' : ''}">
+                    </div>
+                    <div class="auth-input">
+                        <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
+                        [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
+                    </div>
+                </div>
+
+                <div class="auth-button">
+                    <button class="button" [disabled]="modalForm.invalid" (click)="submitContactForm()">Оставить заявку</button>
+                </div>
+            </div>
+
+            <div *ngSwitchCase="modalTypes.consult" class="auth-form">
+                <div class="auth-title">Закажите бесплатную консультацию!</div>
+
+                <div class="auth-inputs">
+                    <div class="auth-input">
+                        <input type="text" class="input" placeholder="Ваше имя" formControlName="name"
+                        [ngStyle]="{'border-color': name?.invalid && (name?.dirty || name?.touched) ? 'red' : ''}">
+                    </div>
+                    <div class="auth-input">
+                        <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
+                        [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
+                    </div>
+                </div>
+
+                <div class="auth-button">
+                    <button class="button" [disabled]="modalForm.invalid" (click)="submitContactForm()">Заказать консультацию</button>
+                </div>
+            </div>
+
+            <div *ngSwitchCase="modalTypes.success" class="auth-form">
+                <div class="auth-title">Спасибо за вашу заявку!</div>
+
+                <div class="auth-link">Мы свяжемся с вами при первой же возможности.</div>
+
+                <div class="auth-button">
+                    <button class="button small-button" (click)="closeModal()">Окей</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -16,6 +16,14 @@
     color: $light-blue-color;
 }
 
+@mixin head-lora-38 {
+    font-family: 'Lora', sans-serif;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    color: $light-blue-color;
+}
+
 @mixin d-flex {
     display: flex;
     align-items: center;

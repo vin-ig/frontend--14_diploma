@@ -12,6 +12,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 import {AuthInterceptor} from "./core/auth/auth.interceptor";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {AuthInterceptor} from "./core/auth/auth.interceptor";
         HttpClientModule,
         MatSnackBarModule,
         MatMenuModule,
+        SharedModule,
         AppRoutingModule,
         BrowserAnimationsModule,
     ],
