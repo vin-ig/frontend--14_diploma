@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/mixins";
+
+.policy {
+    margin-bottom: 120px;
+
+    .container {
+        max-width: 720px;
+
+        .article {
+            margin-top: 120px;
+
+            .article-head {
+                @include head-lora-36;
+                margin-bottom: 50px;
+            }
+
+            .article-body {
+                line-height: 1.5;
+                text-align: justify;
+            }
+        }
+    }
+}
