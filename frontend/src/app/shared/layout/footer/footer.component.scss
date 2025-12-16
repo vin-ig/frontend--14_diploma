@@ -53,9 +53,14 @@
                 font-weight: 400;
                 color: $dark-blue-text-color;
                 max-width: 260px;
+                display: flex;
 
-                p {
-                    margin: 0;
+                &.phone {
+                    flex-direction: column;
+                }
+
+                &.social-media {
+                    gap: 12px;
                 }
 
                 .button {
@@ -64,10 +69,6 @@
                     font-size: 12px;
                     font-weight: 500;
                     margin-top: 10px;
-                }
-
-                a {
-                    margin-right: 12px;
                 }
             }
         }

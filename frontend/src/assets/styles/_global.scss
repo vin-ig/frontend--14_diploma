@@ -32,12 +32,12 @@ a {
 .input {
     box-sizing: border-box;
     padding: 17px 20px;
-    border: 2px solid #2A592E;
+    border: 2px solid $light-blue-color;
     border-radius: 3px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    color: $gray-text-color;
+    color: $dark-blue-text-color;
 }
 
 .small-input {

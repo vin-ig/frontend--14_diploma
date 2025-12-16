@@ -28,6 +28,13 @@
                 width: 430px;
                 list-style: none;
                 padding: 0;
+
+                a {
+                    &:hover,
+                    &.active {
+                        color: $light-blue-color;
+                    }
+                }
             }
         }
 
