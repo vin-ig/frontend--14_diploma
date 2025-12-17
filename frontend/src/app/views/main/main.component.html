@@ -49,5 +49,73 @@
                 </a>
             </div>
         </section>
+
+
+        <section class="services">
+            <div class="services-title">Услуги, которые мы предлагаем</div>
+            <div class="services-items">
+                <div class="service-item" *ngFor="let service of services">
+                    <div class="service-item-image">
+                        <img src="assets/images/pages/main/{{service.image}}" alt="Service">
+                    </div>
+                    <div class="service-item-title">{{ service.title }}</div>
+                    <div class="service-item-text">{{ service.text }}</div>
+                    <div class="service-item-footer">
+                        <div class="service-item-price">
+                            От {{ service.price | currency: 'RUB' : 'symbol-narrow' : '1.0-0' : 'ru' }}
+                        </div>
+                        <div class="button" (click)="serviceRequest(service.title)">Подробнее</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="about">
+            <div class="about-image">
+                <img src="assets/images/pages/main/team.png" alt="Team">
+            </div>
+            <div class="about-content">
+                <div class="about-title">Кто мы и чем мы занимаемся?</div>
+                <div class="about-text">
+                    <span>АйтиШторм</span> — это ваш помощник №1 при решении таких вопросов, как продвижение в сети,
+                    разработка
+                    сайтов для бизнеса и личного бренда, сторисмейкинг, копирайтинг, маркетинг, разработка визуальной
+                    концепции и создание инфопродуктов. Компания была основана в 2019 году и за всё это время смогла
+                    выйти в ТОП-10 агенств, предлагающих услуги продвижения в сети.
+                </div>
+                <div class="about-advantages-title">Наши преимущества</div>
+                <div class="about-advantages">
+                    <div class="about-advantage">
+                        <div class="about-advantage-number">1</div>
+                        <div class="about-advantage-text">
+                            <span>Мастерски вовлекаем аудиторию в процесс.</span> Мы увеличиваем процент вовлечённости за
+                            короткий промежуток времени.
+                        </div>
+                    </div>
+                    <div class="about-advantage">
+                        <div class="about-advantage-number">2</div>
+                        <div class="about-advantage-text">
+                            <span>Разрабатываем бомбическую визуальную концепцию.</span> Наши специалисты знают как
+                            создать уникальный образ вашего проекта.
+                        </div>
+                    </div>
+                    <div class="about-advantage">
+                        <div class="about-advantage-number">3</div>
+                        <div class="about-advantage-text">
+                            <span>Создаём мощные воронки с помощью текстов.</span> Наши копирайтеры создают не только
+                            вкусные текста, но и классные воронки.
+                        </div>
+                    </div>
+                    <div class="about-advantage">
+                        <div class="about-advantage-number">4</div>
+                        <div class="about-advantage-text">
+                            <span>Помогаем продавать больше.</span> Мы не только помогаем разработать стратегию по
+                            продажам, но также корректируем её под нужды заказчика.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </main>

@@ -43,6 +43,33 @@ export class MainComponent implements OnInit {
         },
     }
 
+    services = [
+        {
+            title: 'Создание сайтов',
+            text: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!',
+            image: 'service-1.png',
+            price: 7500,
+        },
+        {
+            title: 'Продвижение',
+            text: 'Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения” на наивысшем уровне!',
+            image: 'service-2.png',
+            price: 3500,
+        },
+        {
+            title: 'Реклама',
+            text: 'Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост клиентов за счёт правильно настроенной рекламы.',
+            image: 'service-3.png',
+            price: 1000,
+        },
+        {
+            title: 'Копирайтинг',
+            text: 'Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и помогут выйти на новый уровень в продажах.',
+            image: 'service-4.png',
+            price: 750,
+        },
+    ]
+
     constructor(private sanitizer: DomSanitizer) {
     }
 
@@ -51,5 +78,9 @@ export class MainComponent implements OnInit {
 
     safeTitle(text: string): SafeHtml {
         return this.sanitizer.bypassSecurityTrustHtml(text)
+    }
+
+    serviceRequest(serviceName: string) {
+
     }
 }
