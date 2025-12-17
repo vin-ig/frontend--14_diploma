@@ -64,6 +64,7 @@ a {
     border: 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+    font-size: 16px;
     color: white;
 
     &.button-transparent {
@@ -226,5 +227,32 @@ a {
     .button {
         width: 255px;
         margin-top: 10px;
+    }
+}
+
+
+//Стили для карусели
+.carousel-item-title span {
+    color: $light-blue-color;
+}
+
+.owl-carousel .owl-dots {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+
+    .owl-dot {
+        span {
+            transition: all 0.3s ease;
+            opacity: 1;
+            border: 1px solid white;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        &.active span {
+            background: white;
+        }
     }
 }
