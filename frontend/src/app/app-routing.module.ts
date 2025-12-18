@@ -11,14 +11,21 @@ const routes: Routes = [
         children: [
             {path: '', component: MainComponent},
             {path: '', loadChildren: () => import('./views/user/user.module').then(m => m.UserModule), canActivate: [AuthForwardGuard]},
-            // {path: '', loadChildren: () => import('./views/product/product.module').then(m => m.ProductModule)},
+            {path: '', loadChildren: () => import('./views/blog/blog.module').then(m => m.BlogModule)},
             // {path: '', loadChildren: () => import('./views/order/order.module').then(m => m.OrderModule)},
             // {path: '', loadChildren: () => import('./views/personal/personal.module').then(m => m.PersonalModule), canActivate: [AuthGuard]},
         ]
     }];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled'})],
+    imports: [RouterModule.forRoot(routes, {
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+        scrollOffset: [0, 50],
+        onSameUrlNavigation: 'reload',
+    relativeLinkResolution: 'corrected',
+    enableTracing: false
+    })],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

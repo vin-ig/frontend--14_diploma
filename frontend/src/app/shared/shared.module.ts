@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ModalComponent} from './components/modal/modal.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ArticleCardComponent } from './components/article-card/article-card.component';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
     imports: [
         CommonModule,
         FormsModule,
+        RouterModule,
         ReactiveFormsModule
     ],
     exports: [
