@@ -5,6 +5,8 @@ import {ArticleService} from "../../shared/services/article.service";
 import {ArticleType} from "../../../types/article.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {StaticData} from "./static-data";
+import {ModalTypeEnum} from "../../../types/modal-type.enum";
+import {ModalService} from "../../shared/services/modal.service";
 
 @Component({
     selector: 'app-main',
@@ -15,6 +17,7 @@ export class MainComponent implements OnInit {
     carouselItems = StaticData.carouselItems
     services = StaticData.services
     reviews = StaticData.reviews
+    modalTypes = ModalTypeEnum
 
     bannerOptions: OwlOptions = {
         loop: true,
@@ -60,6 +63,7 @@ export class MainComponent implements OnInit {
     constructor(
         private sanitizer: DomSanitizer,
         private articleService: ArticleService,
+        private modalService: ModalService,
     ) {
     }
 
@@ -82,7 +86,7 @@ export class MainComponent implements OnInit {
         return this.sanitizer.bypassSecurityTrustHtml(text)
     }
 
-    serviceRequest(serviceName: string) {
-
+    serviceRequest(modalType: ModalTypeEnum, serviceName?: string) {
+        this.modalService.show(ModalTypeEnum.order, serviceName)
     }
 }

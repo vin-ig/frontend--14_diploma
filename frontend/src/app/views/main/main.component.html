@@ -8,7 +8,7 @@
                             <div class="carousel-item-label">{{ item.label }}</div>
                             <div class="carousel-item-title" [innerHTML]="safeTitle(item.title)"></div>
                             <div class="carousel-item-text" *ngIf="item.text">{{ item.text }}</div>
-                            <button class="button">Подробнее</button>
+                            <button class="button" (click)="serviceRequest(modalTypes.order)">Подробнее</button>
                         </div>
                     </div>
                 </ng-template>
@@ -64,7 +64,7 @@
                         <div class="service-item-price">
                             От {{ service.price | currency: 'RUB' : 'symbol-narrow' : '1.0-0' : 'ru' }}
                         </div>
-                        <div class="button" (click)="serviceRequest(service.title)">Подробнее</div>
+                        <div class="button" (click)="serviceRequest(modalTypes.order, service.title)">Подробнее</div>
                     </div>
                 </div>
             </div>

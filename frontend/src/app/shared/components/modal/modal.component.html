@@ -13,8 +13,11 @@
 
                 <div class="auth-inputs">
                     <div class="auth-input">
-                        <input type="text" class="input" placeholder="Категория" formControlName="category"
+                        <select class="input" formControlName="category"
                         [ngStyle]="{'border-color': category?.invalid && (category?.dirty || category?.touched) ? 'red' : ''}">
+                            <option [ngValue]="null" selected hidden>Категория</option>
+                            <option *ngFor="let service of services" [ngValue]="service.title">{{ service.title }}</option>
+                        </select>
                     </div>
                     <div class="auth-input">
                         <input type="text" class="input" placeholder="Ваше имя" formControlName="name"
