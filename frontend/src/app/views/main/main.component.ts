@@ -4,6 +4,7 @@ import {OwlOptions} from "ngx-owl-carousel-o";
 import {ArticleService} from "../../shared/services/article.service";
 import {ArticleType} from "../../../types/article.type";
 import {HttpErrorResponse} from "@angular/common/http";
+import {StaticData} from "./static-data";
 
 @Component({
     selector: 'app-main',
@@ -11,27 +12,11 @@ import {HttpErrorResponse} from "@angular/common/http";
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-    carouselItems = [
-        {
-            label: 'Предложение месяца',
-            title: 'Продвижение в Instagram для вашего бизнеса <span>-15%</span>!',
-            text: '',
-            image: 'carousel-1.png',
-        },
-        {
-            label: 'Акция',
-            title: 'Нужен грамотный <span>копирайтер</span>?',
-            text: 'Весь декабрь у нас действует акция на работу копирайтера.',
-            image: 'carousel-2.png',
-        },
-        {
-            label: 'Новость дня',
-            title: '<span>6 место</span> в ТОП-10<br> SMM-агенств Москвы!',
-            text: 'Мы благодарим каждого, кто голосовал за нас!',
-            image: 'carousel-3.png',
-        },
-    ]
-    customOptions: OwlOptions = {
+    carouselItems = StaticData.carouselItems
+    services = StaticData.services
+    reviews = StaticData.reviews
+
+    bannerOptions: OwlOptions = {
         loop: true,
         mouseDrag: false,
         touchDrag: false,
@@ -45,39 +30,37 @@ export class MainComponent implements OnInit {
             },
         },
     }
-    services = [
-        {
-            title: 'Создание сайтов',
-            text: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!',
-            image: 'service-1.png',
-            price: 7500,
+    reviewsOptions: OwlOptions = {
+        loop: true,
+        mouseDrag: false,
+        touchDrag: false,
+        pullDrag: false,
+        margin: 25,
+        navSpeed: 700,
+        dots: false,
+        navText: ['', ''],
+        responsive: {
+            0: {
+                items: 1
+            },
+            400: {
+                items: 2
+            },
+            740: {
+                items: 3
+            },
+            940: {
+                items: 3
+            }
         },
-        {
-            title: 'Продвижение',
-            text: 'Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения” на наивысшем уровне!',
-            image: 'service-2.png',
-            price: 3500,
-        },
-        {
-            title: 'Реклама',
-            text: 'Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост клиентов за счёт правильно настроенной рекламы.',
-            image: 'service-3.png',
-            price: 1000,
-        },
-        {
-            title: 'Копирайтинг',
-            text: 'Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и помогут выйти на новый уровень в продажах.',
-            image: 'service-4.png',
-            price: 750,
-        },
-    ]
+    }
 
     popularArticles: ArticleType[] = []
 
     constructor(
         private sanitizer: DomSanitizer,
         private articleService: ArticleService,
-        ) {
+    ) {
     }
 
     ngOnInit(): void {

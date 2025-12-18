@@ -9,7 +9,6 @@
 
             .carousel-item {
                 background-position: right;
-                //background-size: unset;
                 background-repeat: no-repeat;
                 height: 500px;
 
@@ -18,7 +17,7 @@
                     flex-direction: column;
                     justify-content: center;
                     padding-left: 80px;
-                    background-image: url("../../../assets/images/pages/main/circle.png");
+                    background-image: url("../../../assets/images/pages/main/banner/circle.png");
                     background-repeat: no-repeat;
                     height: 100%;
                     width: 100%;
@@ -235,6 +234,69 @@
 
                 svg {
                     margin-left: 14px;
+                }
+            }
+        }
+
+        .reviews {
+            margin-bottom: 120px;
+
+            .reviews-title {
+                @include head-lora-38;
+                margin-bottom: 20px;
+            }
+
+            .reviews-carousel {
+                position: relative;
+
+                .review-item {
+                    width: 396px;
+                    padding: 30px;
+                    border: 2px solid $light-blue-color;
+                    box-sizing: border-box;
+                    border-radius: 5px;
+
+                    .review-head {
+                        @include d-flex;
+                        gap: 26px;
+                        margin-bottom: 15px;
+
+                        .review-image {
+                            @include background-image(60px, 60px, 50%)
+                        }
+
+                        .review-name {
+                            font-weight: 600;
+                            font-size: 18px;
+                            color: $light-blue-color;
+                        }
+                    }
+
+                    .review-body {
+                        height: 132px;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 1.4;
+                        color: $dark-blue-text-color;
+                    }
+                }
+
+                .carousel-reviews-arrows {
+                    @include d-flex-between;
+                    position: absolute;
+                    top: calc(50%);
+                    font-size: 0;
+                    width: 100%;
+
+                    .move-backward {
+                        left: -25px;
+                        position: absolute;
+                    }
+
+                    .move-forward {
+                        right: -25px;
+                        position: absolute;
+                    }
                 }
             }
         }
