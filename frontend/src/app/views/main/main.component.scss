@@ -300,5 +300,47 @@
                 }
             }
         }
+
+        .contacts {
+            margin-bottom: 120px;
+            display: flex;
+
+            .contacts-info {
+                margin-left: 26px;
+
+                .contacts-title {
+                    @include head-lora-38;
+                    margin-bottom: 20px;
+                }
+
+                .contacts-items {
+                    max-width: 500px;
+
+                    .contacts-item {
+                        margin-bottom: 20px;
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+
+                        .contacts-item-head {
+                            font-weight: 500;
+                            font-size: 20px;
+                            color: $light-blue-color;
+                            margin-bottom: 10px;
+                        }
+
+                        .contacts-item-body {
+                            font-weight: 400;
+                            font-size: 14px;
+                            color: $dark-blue-text-color;
+                            line-height: 1.3;
+                            @include d-flex;
+                            gap: 20px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
