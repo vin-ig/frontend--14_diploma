@@ -208,5 +208,35 @@
                 }
             }
         }
+
+        .popular-articles {
+            margin-bottom: 120px;
+
+            .popular-articles-title {
+                @include head-lora-38;
+                margin-bottom: 40px;
+            }
+
+            .popular-articles-cards {
+                margin-bottom: 40px;
+                @include d-flex-between;
+                gap: 24px;
+            }
+
+            .popular-articles-link {
+                @include d-flex;
+                justify-content: flex-end;
+
+                span {
+                    font-weight: 500;
+                    font-size: 20px;
+                    color: $light-blue-color;
+                }
+
+                svg {
+                    margin-left: 14px;
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {OwlOptions} from "ngx-owl-carousel-o";
+import {ArticleService} from "../../shared/services/article.service";
+import {ArticleType} from "../../../types/article.type";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-main',
@@ -42,7 +45,6 @@ export class MainComponent implements OnInit {
             },
         },
     }
-
     services = [
         {
             title: 'Создание сайтов',
@@ -70,10 +72,27 @@ export class MainComponent implements OnInit {
         },
     ]
 
-    constructor(private sanitizer: DomSanitizer) {
+    popularArticles: ArticleType[] = []
+
+    constructor(
+        private sanitizer: DomSanitizer,
+        private articleService: ArticleService,
+        ) {
     }
 
     ngOnInit(): void {
+        this.articleService.getPopularArticles().subscribe({
+            next: (result: ArticleType[]) => {
+                this.popularArticles = result
+            },
+            error: (errorResponse: HttpErrorResponse) => {
+                if (errorResponse.error && errorResponse.error.message) {
+                    console.log(errorResponse.error.message)
+                } else {
+                    console.log('Ошибка получения популярных статей')
+                }
+            },
+        })
     }
 
     safeTitle(text: string): SafeHtml {
