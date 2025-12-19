@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ArticleType} from "../../../../types/article.type";
 import {ArticleService} from "../../../shared/services/article.service";
-import {DefaultResponseType} from "../../../../types/default-response.type";
-import {ModalTypeEnum} from "../../../../types/modal-type.enum";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ArticleListType} from "../../../../types/article-list.type";
 import {CategoryType} from "../../../../types/category.type";
 import {CategoryService} from "../../../shared/services/category.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ActiveParamsType} from "../../../../types/active-params.type";
 
 @Component({
     selector: 'app-article-list',
@@ -20,16 +20,62 @@ export class ArticleListComponent implements OnInit {
     articles: ArticleType[] = []
     openFilter: boolean = false
     categories: CategoryType[] = []
+    categoriesInFilter: CategoryType[] = []
+    activeParams: ActiveParamsType = {categories: []}
 
     constructor(
         private articleService: ArticleService,
         private _snackBar: MatSnackBar,
         private categoryService: CategoryService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
     ) {
     }
 
     ngOnInit(): void {
-        this.articleService.getAllArticles().subscribe({
+
+        this.categoryService.getCategories().subscribe({
+            next: (result: CategoryType[]) => {
+                this.categories = result
+                this.setActiveParamsFromUrl()
+                this.updateFilter()
+                this.updateArticles()
+            },
+            error: (errorResponse: HttpErrorResponse) => {
+                if (errorResponse.error && errorResponse.error.message) {
+                    this._snackBar.open(errorResponse.error.message, 'Закрыть')
+                } else {
+                    this._snackBar.open('Ошибка получения категорий', 'Закрыть')
+                }
+            }
+        })
+    }
+
+    toggleFilterMenu() {
+        this.openFilter = !this.openFilter
+    }
+
+    processFiler(category: CategoryType) {
+        const currentCategoryInFilter = this.categoriesInFilter.find(item => item.id === category.id)
+        if (currentCategoryInFilter) {
+            category.isInFilter = false
+            this.categoriesInFilter = this.categoriesInFilter.filter(item => item.id !== category.id)
+        } else {
+            category.isInFilter = true
+            this.categoriesInFilter.push(category)
+        }
+
+        this.updateUrlParams()
+        this.updateArticles()
+    }
+
+    updateUrlParams() {
+        this.activeParams.categories = this.categoriesInFilter.map(item => item.url)
+        this.router.navigate(['/articles'], {queryParams: this.activeParams})
+    }
+
+    updateArticles() {
+        this.articleService.getAllArticles(this.activeParams).subscribe({
             next: (result: ArticleListType) => {
                 this.count = result.count
                 this.pages = result.pages
@@ -42,24 +88,28 @@ export class ArticleListComponent implements OnInit {
                     this._snackBar.open('Ошибка получения статей', 'Закрыть')
                 }
             }
-
-        })
-
-        this.categoryService.getCategories().subscribe({
-            next: (result: CategoryType[]) => {
-                this.categories = result
-            },
-            error: (errorResponse: HttpErrorResponse) => {
-                if (errorResponse.error && errorResponse.error.message) {
-                    this._snackBar.open(errorResponse.error.message, 'Закрыть')
-                } else {
-                    this._snackBar.open('Ошибка получения категорий', 'Закрыть')
-                }
-            }
         })
     }
 
-    toggleFilter() {
-        this.openFilter = !this.openFilter
+    setActiveParamsFromUrl() {
+        this.activatedRoute.queryParams
+            .subscribe(params => {
+                this.activeParams = {categories: []}
+                if (params.hasOwnProperty('categories')) {
+                    const parCategories = params['categories']
+                    this.activeParams.categories = Array.isArray(parCategories) ? parCategories : [parCategories]
+                }
+                if (params.hasOwnProperty('page')) { this.activeParams.page = params['page']}
+            })
+    }
+
+    updateFilter() {
+        this.categoriesInFilter = []
+        this.categories.forEach(item => {
+            if (this.activeParams.categories.includes(item.url)) {
+                item.isInFilter = true
+                this.categoriesInFilter.push(item)
+            }
+        })
     }
 }

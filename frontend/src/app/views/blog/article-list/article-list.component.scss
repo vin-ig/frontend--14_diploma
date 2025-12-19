@@ -31,6 +31,10 @@
                     color: $light-blue-color;
                     @include d-flex;
                     gap: 8px;
+
+                    svg {
+                        cursor: pointer;
+                    }
                 }
             }
 
@@ -72,7 +76,6 @@
 
                         &.active {
                             color: $dark-blue-text-color;
-                            cursor: default;
                         }
 
                         &:hover {

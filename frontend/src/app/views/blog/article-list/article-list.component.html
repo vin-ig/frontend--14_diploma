@@ -4,9 +4,9 @@
 
         <div class="head">
             <div class="applied-filters">
-                <div class="applied-filter">
-                    <span>cat</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="applied-filter" *ngFor="let category of categoriesInFilter">
+                    <span>{{category.name}}</span>
+                    <svg (click)="processFiler(category)" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_21333_627)">
                         <line x1="1.93553" y1="2.65002" x2="13.9563" y2="14.6708" stroke="#709FDC" stroke-linecap="round"/>
                         <line x1="13.9236" y1="2.62984" x2="1.90278" y2="14.6507" stroke="#709FDC" stroke-linecap="round"/>
@@ -19,7 +19,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="filter-menu" [class.open]="openFilter" (click)="toggleFilter()">
+            <div class="filter-menu" [class.open]="openFilter" (click)="toggleFilterMenu()">
                 <div class="filter-menu-head">
                     <span>Фильтр</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,10 +27,12 @@
                     </svg>
                 </div>
                 <div class="filter-menu-body">
-                    <div class="filter-menu-item" *ngFor="let category of categories">
+                    <div class="filter-menu-item"
+                         [class.active]="category.isInFilter"
+                         *ngFor="let category of categories" (click)="processFiler(category)">
                         <span>{{category.name}}</span>
-                        <span>+</span>
-<!--                        <span>-</span>-->
+                        <span *ngIf="!category.isInFilter">+</span>
+                        <span *ngIf="category.isInFilter">-</span>
                     </div>
                 </div>
             </div>
@@ -40,7 +42,7 @@
             <article-card *ngFor="let article of articles" [article]="article"></article-card>
         </div>
 
-        <div class="pagination" *ngIf="pages > 0">
+        <div class="pagination" *ngIf="pages > 1">
 <!--                 [class.disabled]="activeParams.page ? activeParams.page === 1 : true"-->
 <!--                 (click)="openPrevPage()">-->
             <div class="pagination-arrow">

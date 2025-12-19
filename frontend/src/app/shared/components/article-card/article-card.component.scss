@@ -27,6 +27,7 @@
     .article-content {
         height: 224px;
         margin-bottom: 20px;
+        overflow: hidden;
 
         .article-title {
             margin-top: 15px;
@@ -43,11 +44,11 @@
             line-height: 1.3;
 
              /* Скрываем лишний текст */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 7;
-            -webkit-box-orient: vertical;
+            //overflow: hidden;
+            //text-overflow: ellipsis;
+            //display: -webkit-box;
+            //-webkit-line-clamp: 7;
+            //-webkit-box-orient: vertical;
         }
     }
 
