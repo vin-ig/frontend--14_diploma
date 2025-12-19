@@ -15,6 +15,7 @@ import {ActiveParamsType} from "../../../../types/active-params.type";
     styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
+    readonly articlesRoute = '/articles'
     pages: number = 0
     count: number = 0
     articles: ArticleType[] = []
@@ -33,7 +34,10 @@ export class ArticleListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.initPage()
+    }
 
+    initPage(): void {
         this.categoryService.getCategories().subscribe({
             next: (result: CategoryType[]) => {
                 this.categories = result
@@ -65,13 +69,14 @@ export class ArticleListComponent implements OnInit {
             this.categoriesInFilter.push(category)
         }
 
+        delete this.activeParams.page
         this.updateUrlParams()
         this.updateArticles()
     }
 
     updateUrlParams() {
         this.activeParams.categories = this.categoriesInFilter.map(item => item.url)
-        this.router.navigate(['/articles'], {queryParams: this.activeParams})
+        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
     }
 
     updateArticles() {
@@ -99,7 +104,7 @@ export class ArticleListComponent implements OnInit {
                     const parCategories = params['categories']
                     this.activeParams.categories = Array.isArray(parCategories) ? parCategories : [parCategories]
                 }
-                if (params.hasOwnProperty('page')) { this.activeParams.page = params['page']}
+                if (params.hasOwnProperty('page')) {this.activeParams.page = +params['page']}
             })
     }
 
@@ -111,5 +116,39 @@ export class ArticleListComponent implements OnInit {
                 this.categoriesInFilter.push(item)
             }
         })
+    }
+
+
+    openPage(page: number): void {
+        if (!this.activeParams.page && page == 1 || this.activeParams.page === page) {
+            return
+        }
+
+        this.activeParams.page = page
+        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
+        this.initPage()
+    }
+
+    openPrevPage(): void {
+        if (this.activeParams.page && this.activeParams.page > 1) {
+            this.activeParams.page--
+            this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
+        }
+        this.initPage()
+    }
+
+    openNextPage(): void {
+        if (this.activeParams.page === this.pages) {
+            return
+        }
+
+        if (!this.activeParams.page && this.pages > 1) {
+            this.activeParams.page = 2
+        } else if (this.activeParams.page && this.activeParams.page < this.pages) {
+            this.activeParams.page++
+        }
+
+        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
+        this.initPage()
     }
 }
