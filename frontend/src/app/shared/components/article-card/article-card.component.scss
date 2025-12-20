@@ -6,6 +6,7 @@
     font-weight: 400;
     width: 291px;
     position: relative;
+    cursor: pointer;
 
     .article-label {
         @include d-flex-center;

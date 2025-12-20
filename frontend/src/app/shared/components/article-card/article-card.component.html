@@ -1,9 +1,9 @@
-<section class="article-card" *ngIf="article">
+<section class="article-card" *ngIf="article" routerLink="/articles/{{article.url}}">
     <div class="article-label">{{ article.category }}</div>
     <div class="article-image" style="background-image: url({{serverStaticPath + article.image}})"></div>
     <div class="article-content">
         <div class="article-title">{{article.title}}</div>
         <div class="article-text">{{article.description}}</div>
     </div>
-    <a routerLink="/articles/{{article.url}}" class="article-link">Читать дальше</a>
+    <a class="article-link">Читать дальше</a>
 </section>
