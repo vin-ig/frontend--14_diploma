@@ -24,7 +24,7 @@ MongoDBConnection.getConnection((error, connection) => {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.json());
     app.use(cors({
-      origin: 'http://localhost:4200',
+      origin: true,
       credentials: true
     }));
 
