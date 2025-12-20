@@ -13,6 +13,7 @@ import {ArticleType} from "../../../../types/article.type";
 import {AuthService} from "../../../core/auth/auth.service";
 import {CommentService} from "../../../shared/services/comment.service";
 import {ModalTypeEnum} from "../../../../types/modal-type.enum";
+import {CommentsType} from "../../../../types/comments.type";
 
 @Component({
     selector: 'app-article-detail',
@@ -20,11 +21,15 @@ import {ModalTypeEnum} from "../../../../types/modal-type.enum";
     styleUrls: ['./article-detail.component.scss']
 })
 export class ArticleDetailComponent implements OnInit {
-    serverStaticPath = environment.serverStaticPath
+    readonly serverStaticPath = environment.serverStaticPath
+    readonly basicOffset = 3
+    readonly newCommentsCount = 10
+
     article!: ArticleDetailType
     relatedArticles: ArticleType[] = []
     isLogged: boolean = false
     commentText: string | null = null
+    offset: number = this.basicOffset
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -98,6 +103,9 @@ export class ArticleDetailComponent implements OnInit {
                     throw new Error(result.message)
                 }
                 this._snackBar.open('Комментарий добавлен', 'Закрыть')
+                this.commentText = null
+                this.getComments(0)
+                this.offset = this.basicOffset
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
@@ -107,5 +115,34 @@ export class ArticleDetailComponent implements OnInit {
                 }
             }
         })
+    }
+
+    getComments(offset: number) {
+        this.commentService.getComments(this.article.id, offset).subscribe({
+            next: (result: CommentsType | DefaultResponseType) => {
+                if ((result as DefaultResponseType).error !== undefined) {
+                    throw new Error((result as DefaultResponseType).message)
+                }
+                const comments = result as CommentsType
+                this.article.commentsCount = comments.allCount
+                if (offset === 0) {
+                    this.article.comments = comments.comments.slice(0, this.basicOffset)
+                } else {
+                    this.article.comments = this.article.comments.concat(comments.comments)
+                }
+            },
+            error: (errorResponse: HttpErrorResponse) => {
+                if (errorResponse.error && errorResponse.error.message) {
+                    this._snackBar.open(errorResponse.error.message, 'Закрыть')
+                } else {
+                    this._snackBar.open('Ошибка получения комментариев', 'Закрыть')
+                }
+            }
+        })
+    }
+
+    getMoreComments() {
+        this.getComments(this.offset)
+        this.offset += this.newCommentsCount
     }
 }

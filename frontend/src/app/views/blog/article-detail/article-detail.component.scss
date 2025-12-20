@@ -10,9 +10,11 @@
         font-weight: 500;
         font-size: 16px;
         color: #B9D5FD;
+        cursor: pointer;
 
         span:last-child {
             color: $light-blue-color;
+            cursor: default;
         }
     }
 

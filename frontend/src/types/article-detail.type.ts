@@ -1,5 +1,4 @@
 import {CommentType} from "./comment.type";
-import {SafeHtml} from "@angular/platform-browser";
 
 export type ArticleDetailType = {
     id: string,

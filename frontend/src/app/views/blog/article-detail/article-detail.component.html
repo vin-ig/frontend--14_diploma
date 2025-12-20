@@ -1,6 +1,6 @@
 <section class="article-detail container" *ngIf="article">
     <div class="bread-crumbs">
-        <span>Блог / </span>
+        <span routerLink="/articles">Блог / </span>
         <span>{{article.title}}</span>
     </div>
 
@@ -62,12 +62,12 @@
 
     <div class="comments-block">
         <div class="comments-title">Комментарии к статье</div>
-        <div class="comments-notification">
+        <div class="comments-notification" *ngIf="article.commentsCount === 0">Будьте первым, кто оставит свой комментарий к статье!</div>
+        <div class="comments-notification" *ngIf="!isLogged">
             Чтобы оставлять комментарии, <a routerLink="/login">войдите</a> или
             <a routerLink="/signup">зарегистрируйтесь</a>.
         </div>
-        <div class="comments-notification">Будьте первым, кто оставит свой комментарий к статье!</div>
-        <div class="comments-new-comment">
+        <div class="comments-new-comment" *ngIf="isLogged">
             <textarea class="input" [(ngModel)]="commentText" placeholder="Напишите Ваш комментарий к статье..."></textarea>
             <button class="button" (click)="postComment()">Опубликовать комментарий</button>
         </div>
@@ -75,7 +75,7 @@
             <comment-component *ngFor="let comment of article.comments" [comment]="comment"></comment-component>
         </div>
 
-        <div class="comments-more">
+        <div class="comments-more" (click)="getMoreComments()" *ngIf="article.commentsCount > article.comments.length">
             <span>Загрузить еще комментарии</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 14C9.41668 14 8.83335 13.775 8.39168 13.3334L2.95835 7.90003C2.71668 7.65837 2.71668 7.25837 2.95835 7.0167C3.20002 6.77503 3.60002 6.77503 3.84168 7.0167L9.27502 12.45C9.67502 12.85 10.325 12.85 10.725 12.45L16.1583 7.0167C16.4 6.77503 16.8 6.77503 17.0417 7.0167C17.2833 7.25837 17.2833 7.65837 17.0417 7.90003L11.6083 13.3334C11.1667 13.775 10.5833 14 10 14Z" fill="#709FDC"/>
