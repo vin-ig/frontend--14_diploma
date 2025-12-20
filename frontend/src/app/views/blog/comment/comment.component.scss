@@ -1,0 +1,64 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.comment {
+    margin-top: 40px;
+
+    .comment-head {
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        column-gap: 26px;
+        margin-bottom: 15px;
+
+        .image {
+            grid-row-start: 1;
+            grid-row-end: 3;
+            @include d-flex-center;
+            background: #B9D5FD;
+            border: 2px solid $light-blue-color;
+            border-radius: 50%;
+            box-sizing: border-box;
+            width: 60px;
+            height: 60px;
+
+            svg {
+                width: 75%;
+            }
+        }
+
+        .name {
+            font-weight: 600;
+            font-size: 18px;
+            color: $light-blue-color;
+        }
+
+        .date {
+            font-weight: 600;
+            font-size: 14px;
+            color: #BEBEBE;
+        }
+    }
+
+    .comment-body {
+        font-size: 14px;
+        line-height: 1.4;
+        color: $dark-blue-text-color;
+        margin-bottom: 40px;
+    }
+
+    .comment-footer {
+        @include d-flex;
+        gap: 15px;
+
+        .comment-footer-item {
+            @include d-flex;
+            gap: 3px;
+
+            span {
+                font-weight: 600;
+                font-size: 14px;
+                color: $dark-blue-text-color;
+            }
+        }
+    }
+}
