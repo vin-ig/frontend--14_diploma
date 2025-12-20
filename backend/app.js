@@ -23,7 +23,10 @@ MongoDBConnection.getConnection((error, connection) => {
 
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.json());
-    app.use(cors());
+    app.use(cors({
+      origin: 'http://localhost:4200',
+      credentials: true
+    }));
 
     passport.use(new JwtStrategy({
         jwtFromRequest: ExtractJwt.fromHeader('x-auth'),
