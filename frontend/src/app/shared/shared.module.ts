@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import {RouterModule} from "@angular/router";
 import { LoaderComponent } from './components/loader/loader.component';
+import {NgxMaskModule} from "ngx-mask";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LoaderComponent } from './components/loader/loader.component';
         CommonModule,
         FormsModule,
         RouterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [
         ModalComponent,

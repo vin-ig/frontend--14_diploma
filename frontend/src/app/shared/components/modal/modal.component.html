@@ -25,6 +25,7 @@
                     </div>
                     <div class="auth-input">
                         <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
+                        mask="+0 (000) 000-00-00"
                         [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
                     </div>
                 </div>
@@ -44,6 +45,7 @@
                     </div>
                     <div class="auth-input">
                         <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
+                        mask="+0 (000) 000-00-00"
                         [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
                     </div>
                 </div>
