@@ -4,12 +4,14 @@ import {ModalComponent} from './components/modal/modal.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import {RouterModule} from "@angular/router";
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
     declarations: [
         ModalComponent,
-        ArticleCardComponent
+        ArticleCardComponent,
+        LoaderComponent
     ],
     imports: [
         CommonModule,
@@ -20,6 +22,7 @@ import {RouterModule} from "@angular/router";
     exports: [
         ModalComponent,
         ArticleCardComponent,
+        LoaderComponent,
     ]
 })
 export class SharedModule {

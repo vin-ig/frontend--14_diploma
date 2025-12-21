@@ -12,6 +12,8 @@ import {AuthService} from "../../../core/auth/auth.service";
 import {CommentService} from "../../../shared/services/comment.service";
 import {CommentsType} from "../../../../types/comments.type";
 import {ActionForCommentType} from "../../../../types/action-for-comment.type";
+import {LoaderService} from "../../../shared/services/loader.service";
+import {delay} from "rxjs";
 
 @Component({
     selector: 'app-article-detail',
@@ -29,6 +31,7 @@ export class ArticleDetailComponent implements OnInit {
     commentText: string | null = null
     offset: number = this.basicOffset
     commentsActionsForUser: ActionForCommentType[] = []
+    loaderIsShowed: boolean = false
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -37,6 +40,7 @@ export class ArticleDetailComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private authService: AuthService,
         private commentService: CommentService,
+        private loaderService: LoaderService,
     ) {
         this.isLogged = this.authService.isLogged
     }
@@ -45,6 +49,10 @@ export class ArticleDetailComponent implements OnInit {
         this.activatedRoute.params.subscribe(params => {
             this.getArticle(params['url'])
             this.getRelatedArticles(params['url'])
+        })
+
+        this.loaderService.isShowed$.subscribe((value: boolean) => {
+            this.loaderIsShowed = value
         })
     }
 
@@ -119,7 +127,11 @@ export class ArticleDetailComponent implements OnInit {
     }
 
     getComments(offset: number) {
-        this.commentService.getComments(this.article.id, offset).subscribe({
+        this.commentService.getComments(this.article.id, offset)
+            .pipe(
+                delay(2000)  // Для демонстрации loader
+            )
+            .subscribe({
             next: (result: CommentsType | DefaultResponseType) => {
                 if ((result as DefaultResponseType).error !== undefined) {
                     throw new Error((result as DefaultResponseType).message)
@@ -135,6 +147,8 @@ export class ArticleDetailComponent implements OnInit {
                 if (this.isLogged) {
                     this.getCommentActions()
                 }
+
+                this.loaderService.hide()
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
@@ -147,6 +161,8 @@ export class ArticleDetailComponent implements OnInit {
     }
 
     getMoreComments() {
+        this.loaderService.show()
+
         this.getComments(this.offset)
         this.offset += this.newCommentsCount
     }
