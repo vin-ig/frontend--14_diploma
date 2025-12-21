@@ -17,18 +17,18 @@ export class ArticleService {
     }
 
     getPopularArticles(): Observable<ArticleType[]> {
-        return this.http.get<ArticleType[]>(environment.api + 'articles/top')
+        return this.http.get<ArticleType[]>(environment.api + 'articles/top');
     }
 
     getAllArticles(params: ActiveParamsType): Observable<ArticleListType> {
-        return this.http.get<ArticleListType>(environment.api + 'articles', {params: params})
+        return this.http.get<ArticleListType>(environment.api + 'articles', {params: params});
     }
 
     getArticle(url: string): Observable<ArticleDetailType | DefaultResponseType> {
-        return this.http.get<ArticleDetailType | DefaultResponseType>(environment.api + 'articles/' + url)
+        return this.http.get<ArticleDetailType | DefaultResponseType>(environment.api + 'articles/' + url);
     }
 
     getRelatedArticles(url: string): Observable<ArticleType[] | DefaultResponseType> {
-        return this.http.get<ArticleType[] | DefaultResponseType>(environment.api + 'articles/related/' + url)
+        return this.http.get<ArticleType[] | DefaultResponseType>(environment.api + 'articles/related/' + url);
     }
 }

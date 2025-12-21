@@ -9,25 +9,25 @@ import {UserType} from "../../../types/user.type";
     providedIn: 'root'
 })
 export class UserService {
-    readonly userNameKey = 'userName'
-    userName$: Subject<string | null> = new Subject<string | null>()
+    readonly userNameKey = 'userName';
+    userName$: Subject<string | null> = new Subject<string | null>();
 
     constructor(private http: HttpClient) {
     }
 
     getUserInfo(): Observable<DefaultResponseType | UserType> {
-        return this.http.get<DefaultResponseType | UserType>(environment.api + 'users')
+        return this.http.get<DefaultResponseType | UserType>(environment.api + 'users');
     }
 
-    get userName(): string | null {return localStorage.getItem(this.userNameKey)}
+    get userName(): string | null {return localStorage.getItem(this.userNameKey);}
 
     set userName(name: string | null) {
         if (name) {
-            localStorage.setItem(this.userNameKey, name)
-            this.userName$.next(name)
+            localStorage.setItem(this.userNameKey, name);
+            this.userName$.next(name);
         } else {
-            localStorage.removeItem(this.userNameKey)
-            this.userName$.next(null)
+            localStorage.removeItem(this.userNameKey);
+            this.userName$.next(null);
         }
     }
 }

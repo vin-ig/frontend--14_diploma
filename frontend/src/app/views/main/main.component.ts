@@ -14,10 +14,10 @@ import {ModalService} from "../../shared/services/modal.service";
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-    carouselItems = StaticData.carouselItems
-    services = StaticData.services
-    reviews = StaticData.reviews
-    modalTypes = ModalTypeEnum
+    carouselItems = StaticData.carouselItems;
+    services = StaticData.services;
+    reviews = StaticData.reviews;
+    modalTypes = ModalTypeEnum;
 
     bannerOptions: OwlOptions = {
         loop: true,
@@ -32,7 +32,7 @@ export class MainComponent implements OnInit {
                 items: 1
             },
         },
-    }
+    };
     reviewsOptions: OwlOptions = {
         loop: true,
         mouseDrag: false,
@@ -56,9 +56,9 @@ export class MainComponent implements OnInit {
                 items: 3
             }
         },
-    }
+    };
 
-    popularArticles: ArticleType[] = []
+    popularArticles: ArticleType[] = [];
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -70,23 +70,23 @@ export class MainComponent implements OnInit {
     ngOnInit(): void {
         this.articleService.getPopularArticles().subscribe({
             next: (result: ArticleType[]) => {
-                this.popularArticles = result
+                this.popularArticles = result;
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
-                    console.log(errorResponse.error.message)
+                    console.log(errorResponse.error.message);
                 } else {
-                    console.log('Ошибка получения популярных статей')
+                    console.log('Ошибка получения популярных статей');
                 }
             },
-        })
+        });
     }
 
     safeTitle(text: string): SafeHtml {
-        return this.sanitizer.bypassSecurityTrustHtml(text)
+        return this.sanitizer.bypassSecurityTrustHtml(text);
     }
 
     serviceRequest(modalType: ModalTypeEnum, serviceName?: string) {
-        this.modalService.show(ModalTypeEnum.order, serviceName)
+        this.modalService.show(ModalTypeEnum.order, serviceName);
     }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ModalService} from "../../services/modal.service";
 import {ModalTypeEnum} from "../../../../types/modal-type.enum";
 
@@ -7,15 +7,12 @@ import {ModalTypeEnum} from "../../../../types/modal-type.enum";
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
     constructor(private modalService: ModalService) {
     }
 
-    ngOnInit(): void {
-    }
-
     getFreeConsult() {
-        this.modalService.show(ModalTypeEnum.consult)
+        this.modalService.show(ModalTypeEnum.consult);
     }
 }

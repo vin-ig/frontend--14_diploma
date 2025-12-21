@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    readonly accessTokenKey = 'x-auth'
+    readonly accessTokenKey = 'x-auth';
 
     constructor(
         private authService: AuthService,
@@ -21,62 +21,62 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // this.loaderService.show()
 
-        const tokens = this.authService.getTokens()
+        const tokens = this.authService.getTokens();
         if (tokens && tokens.accessToken) {
             const authReq = req.clone({
                 headers: req.headers.set(this.accessTokenKey, tokens.accessToken)
-            })
+            });
             return next.handle(authReq).pipe(
                 catchError((error) => {
                     if (error.status === 401 && !authReq.url.includes('/login') && !authReq.url.includes('/refresh')) {
-                        return this.handle401Error(authReq, next)
+                        return this.handle401Error(authReq, next);
                     }
-                    return throwError(() => error)
+                    return throwError(() => error);
                 }),
                 finalize(() => {
                     // this.loaderService.hide()
                 })
-            )
+            );
         }
 
         return next.handle(req).pipe(
             finalize(() => {
                 // this.loaderService.hide()
             })
-        )
+        );
     }
 
     handle401Error(req: HttpRequest<any>, next: HttpHandler) {
-        console.log('%%%%')
+        console.log('%%%%');
         return this.authService.refresh().pipe(
             switchMap((result: DefaultResponseType | LoginResponseType) => {
-                let error = ''
+                let error = '';
                 if ((result as DefaultResponseType).error !== undefined) {
-                    error = (result as DefaultResponseType).message
+                    error = (result as DefaultResponseType).message;
                 }
 
-                const refreshResult = result as LoginResponseType
+                const refreshResult = result as LoginResponseType;
                 if (!refreshResult.accessToken || !refreshResult.refreshToken || !refreshResult.userId) {
-                    error = 'Auth error'
+                    error = 'Auth error';
                 }
 
                 if (error) {
-                    return throwError(() => new Error(error))
+                    return throwError(() => new Error(error));
                 }
 
                 // Ошибок нет - продолжаем
-                this.authService.setTokens(refreshResult.accessToken, refreshResult.refreshToken)
+                this.authService.setTokens(refreshResult.accessToken, refreshResult.refreshToken);
                 const authReq = req.clone({
                     headers: req.headers.set(this.accessTokenKey, refreshResult.accessToken)
-                })
-                return next.handle(authReq)
+                });
+                return next.handle(authReq);
             }),
 
             catchError(error => {
-                this.authService.removeTokens()
-                this.router.navigate(['/'])
-                return throwError(() => error)
+                this.authService.removeTokens();
+                this.router.navigate(['/']);
+                return throwError(() => error);
             })
-        )
+        );
     }
 }

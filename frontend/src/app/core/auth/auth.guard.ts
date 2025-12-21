@@ -15,11 +15,11 @@ export class AuthGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const isLogged = this.authService.isLogged
+        const isLogged = this.authService.isLogged;
         if (!isLogged) {
-            this._snackBar.open('Для доступа необходимо авторизоваться', 'Закрыть')
+            this._snackBar.open('Для доступа необходимо авторизоваться', 'Закрыть');
         }
-        return isLogged
+        return isLogged;
     }
 
 }

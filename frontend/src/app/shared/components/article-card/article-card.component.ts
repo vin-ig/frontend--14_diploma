@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ArticleType} from "../../../../types/article.type";
 import {environment} from "../../../../environments/environment";
 
@@ -7,14 +7,10 @@ import {environment} from "../../../../environments/environment";
     templateUrl: './article-card.component.html',
     styleUrls: ['./article-card.component.scss']
 })
-export class ArticleCardComponent implements OnInit {
-    serverStaticPath = environment.serverStaticPath
-    @Input() article!: ArticleType
+export class ArticleCardComponent {
+    serverStaticPath = environment.serverStaticPath;
+    @Input() article!: ArticleType;
 
     constructor() {
     }
-
-    ngOnInit(): void {
-    }
-
 }

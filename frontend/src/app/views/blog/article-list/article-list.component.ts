@@ -15,14 +15,14 @@ import {ActiveParamsType} from "../../../../types/active-params.type";
     styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
-    readonly articlesRoute = '/articles'
-    pages: number = 0
-    count: number = 0
-    articles: ArticleType[] = []
-    openFilter: boolean = false
-    categories: CategoryType[] = []
-    categoriesInFilter: CategoryType[] = []
-    activeParams: ActiveParamsType = {categories: []}
+    readonly articlesRoute = '/articles';
+    pages: number = 0;
+    count: number = 0;
+    articles: ArticleType[] = [];
+    openFilter: boolean = false;
+    categories: CategoryType[] = [];
+    categoriesInFilter: CategoryType[] = [];
+    activeParams: ActiveParamsType = {categories: []};
 
     constructor(
         private articleService: ArticleService,
@@ -34,121 +34,121 @@ export class ArticleListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.initPage()
+        this.initPage();
     }
 
     initPage(): void {
         this.categoryService.getCategories().subscribe({
             next: (result: CategoryType[]) => {
-                this.categories = result
-                this.setActiveParamsFromUrl()
-                this.updateFilter()
-                this.updateArticles()
+                this.categories = result;
+                this.setActiveParamsFromUrl();
+                this.updateFilter();
+                this.updateArticles();
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
-                    this._snackBar.open(errorResponse.error.message, 'Закрыть')
+                    this._snackBar.open(errorResponse.error.message, 'Закрыть');
                 } else {
-                    this._snackBar.open('Ошибка получения категорий', 'Закрыть')
+                    this._snackBar.open('Ошибка получения категорий', 'Закрыть');
                 }
             }
-        })
+        });
     }
 
     toggleFilterMenu() {
-        this.openFilter = !this.openFilter
+        this.openFilter = !this.openFilter;
     }
 
     processFiler(category: CategoryType) {
-        const currentCategoryInFilter = this.categoriesInFilter.find(item => item.id === category.id)
+        const currentCategoryInFilter = this.categoriesInFilter.find(item => item.id === category.id);
         if (currentCategoryInFilter) {
-            category.isInFilter = false
-            this.categoriesInFilter = this.categoriesInFilter.filter(item => item.id !== category.id)
+            category.isInFilter = false;
+            this.categoriesInFilter = this.categoriesInFilter.filter(item => item.id !== category.id);
         } else {
-            category.isInFilter = true
-            this.categoriesInFilter.push(category)
+            category.isInFilter = true;
+            this.categoriesInFilter.push(category);
         }
 
-        delete this.activeParams.page
-        this.updateUrlParams()
-        this.updateArticles()
+        delete this.activeParams.page;
+        this.updateUrlParams();
+        this.updateArticles();
     }
 
     updateUrlParams() {
-        this.activeParams.categories = this.categoriesInFilter.map(item => item.url)
-        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
+        this.activeParams.categories = this.categoriesInFilter.map(item => item.url);
+        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams});
     }
 
     updateArticles() {
         this.articleService.getAllArticles(this.activeParams).subscribe({
             next: (result: ArticleListType) => {
-                this.count = result.count
-                this.pages = result.pages
-                this.articles = result.items
+                this.count = result.count;
+                this.pages = result.pages;
+                this.articles = result.items;
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
-                    this._snackBar.open(errorResponse.error.message, 'Закрыть')
+                    this._snackBar.open(errorResponse.error.message, 'Закрыть');
                 } else {
-                    this._snackBar.open('Ошибка получения статей', 'Закрыть')
+                    this._snackBar.open('Ошибка получения статей', 'Закрыть');
                 }
             }
-        })
+        });
     }
 
     setActiveParamsFromUrl() {
         this.activatedRoute.queryParams
             .subscribe(params => {
-                this.activeParams = {categories: []}
+                this.activeParams = {categories: []};
                 if (params.hasOwnProperty('categories')) {
-                    const parCategories = params['categories']
-                    this.activeParams.categories = Array.isArray(parCategories) ? parCategories : [parCategories]
+                    const parCategories = params['categories'];
+                    this.activeParams.categories = Array.isArray(parCategories) ? parCategories : [parCategories];
                 }
-                if (params.hasOwnProperty('page')) {this.activeParams.page = +params['page']}
-            })
+                if (params.hasOwnProperty('page')) {this.activeParams.page = +params['page'];}
+            });
     }
 
     updateFilter() {
-        this.categoriesInFilter = []
+        this.categoriesInFilter = [];
         this.categories.forEach(item => {
             if (this.activeParams.categories.includes(item.url)) {
-                item.isInFilter = true
-                this.categoriesInFilter.push(item)
+                item.isInFilter = true;
+                this.categoriesInFilter.push(item);
             }
-        })
+        });
     }
 
 
     openPage(page: number): void {
         if (!this.activeParams.page && page == 1 || this.activeParams.page === page) {
-            return
+            return;
         }
 
-        this.activeParams.page = page
-        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
-        this.initPage()
+        this.activeParams.page = page;
+        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams});
+        this.initPage();
     }
 
     openPrevPage(): void {
         if (this.activeParams.page && this.activeParams.page > 1) {
-            this.activeParams.page--
-            this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
+            this.activeParams.page--;
+            this.router.navigate([this.articlesRoute], {queryParams: this.activeParams});
         }
-        this.initPage()
+        this.initPage();
     }
 
     openNextPage(): void {
         if (this.activeParams.page === this.pages) {
-            return
+            return;
         }
 
         if (!this.activeParams.page && this.pages > 1) {
-            this.activeParams.page = 2
+            this.activeParams.page = 2;
         } else if (this.activeParams.page && this.activeParams.page < this.pages) {
-            this.activeParams.page++
+            this.activeParams.page++;
         }
 
-        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams})
-        this.initPage()
+        this.router.navigate([this.articlesRoute], {queryParams: this.activeParams});
+        this.initPage();
     }
 }

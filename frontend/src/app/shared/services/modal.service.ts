@@ -10,16 +10,16 @@ import {environment} from "../../../environments/environment";
     providedIn: 'root'
 })
 export class ModalService {
-    modalType$: Subject<{modalType: ModalTypeEnum | null, serviceName?: string}> = new Subject<{modalType: ModalTypeEnum | null, serviceName?: string}>()
+    modalType$: Subject<{modalType: ModalTypeEnum | null, serviceName?: string}> = new Subject<{modalType: ModalTypeEnum | null, serviceName?: string}>();
 
     constructor(private http: HttpClient) {
     }
 
     show(modalType: ModalTypeEnum | null, serviceName?: string) {
-        this.modalType$.next({modalType, serviceName})
+        this.modalType$.next({modalType, serviceName});
     }
 
     sendRequest(payload: RequestType): Observable<DefaultResponseType> {
-        return this.http.post<DefaultResponseType>(environment.api + 'requests', payload)
+        return this.http.post<DefaultResponseType>(environment.api + 'requests', payload);
     }
 }

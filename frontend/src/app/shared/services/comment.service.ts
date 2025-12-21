@@ -16,22 +16,22 @@ export class CommentService {
     }
 
     postComment(article: string, text: string): Observable<DefaultResponseType> {
-        return this.http.post<DefaultResponseType>(environment.api + 'comments', {article, text}, {withCredentials: true})
+        return this.http.post<DefaultResponseType>(environment.api + 'comments', {article, text}, {withCredentials: true});
     }
 
     getComments(article:string, offset: number): Observable<CommentsType | DefaultResponseType> {
-        return this.http.get<CommentsType | DefaultResponseType>(environment.api + 'comments', {params: {article, offset}})
+        return this.http.get<CommentsType | DefaultResponseType>(environment.api + 'comments', {params: {article, offset}});
     }
 
     applyAction(commentId: string, action: CommentActionEnum): Observable<DefaultResponseType> {
-        return this.http.post<DefaultResponseType>(environment.api + 'comments/' + commentId + '/apply-action', {action}, {withCredentials: true})
+        return this.http.post<DefaultResponseType>(environment.api + 'comments/' + commentId + '/apply-action', {action}, {withCredentials: true});
     }
 
     getActionsForComment(commentId:string): Observable<ActionForCommentType[] | DefaultResponseType> {
-        return this.http.get<ActionForCommentType[] | DefaultResponseType>(environment.api + 'comments/' + commentId + '/actions', {withCredentials: true})
+        return this.http.get<ActionForCommentType[] | DefaultResponseType>(environment.api + 'comments/' + commentId + '/actions', {withCredentials: true});
     }
 
     getActionsForAllComments(articleId: string): Observable<ActionForCommentType[] | DefaultResponseType> {
-        return this.http.get<ActionForCommentType[] | DefaultResponseType>(environment.api + 'comments/article-comment-actions', {params: {articleId}, withCredentials: true})
+        return this.http.get<ActionForCommentType[] | DefaultResponseType>(environment.api + 'comments/article-comment-actions', {params: {articleId}, withCredentials: true});
     }
 }

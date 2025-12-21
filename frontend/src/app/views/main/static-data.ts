@@ -18,7 +18,7 @@ export class StaticData {
             text: 'Мы благодарим каждого, кто голосовал за нас!',
             image: 'carousel-3.png',
         },
-    ]
+    ];
 
     static services = [
         {
@@ -45,7 +45,7 @@ export class StaticData {
             image: 'service-4.png',
             price: 750,
         },
-    ]
+    ];
 
     static reviews = [
         {
@@ -78,5 +78,5 @@ export class StaticData {
             text: 'Наблюдаю за развитием АйтиШторма с самого начала. Превращение из небольшого агентства в авторитетный ресурс с крутыми кейсами и глубокими статьями — это впечатляет! Вы — пример того, как нужно расти!',
             image: 'review-6.png',
         },
-    ]
+    ];
 }
