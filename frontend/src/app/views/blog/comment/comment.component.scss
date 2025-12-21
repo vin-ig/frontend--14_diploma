@@ -59,6 +59,22 @@
                 font-size: 14px;
                 color: $dark-blue-text-color;
             }
+
+            svg {
+                stroke: #071739;
+                cursor: pointer;
+            }
+
+            &:hover,
+            &.active {
+                span {
+                    color: $light-blue-color;
+                }
+
+                svg {
+                    stroke: $light-blue-color;
+                }
+            }
         }
     }
 }

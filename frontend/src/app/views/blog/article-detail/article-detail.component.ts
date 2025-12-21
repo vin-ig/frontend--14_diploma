@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleDetailType} from "../../../../types/article-detail.type";
 import {ArticleService} from "../../../shared/services/article.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CategoryService} from "../../../shared/services/category.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ArticleListType} from "../../../../types/article-list.type";
+import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
@@ -12,8 +10,8 @@ import {environment} from "../../../../environments/environment";
 import {ArticleType} from "../../../../types/article.type";
 import {AuthService} from "../../../core/auth/auth.service";
 import {CommentService} from "../../../shared/services/comment.service";
-import {ModalTypeEnum} from "../../../../types/modal-type.enum";
 import {CommentsType} from "../../../../types/comments.type";
+import {ActionForCommentType} from "../../../../types/action-for-comment.type";
 
 @Component({
     selector: 'app-article-detail',
@@ -30,6 +28,7 @@ export class ArticleDetailComponent implements OnInit {
     isLogged: boolean = false
     commentText: string | null = null
     offset: number = this.basicOffset
+    commentsActionsForUser: ActionForCommentType[] = []
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -38,8 +37,6 @@ export class ArticleDetailComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private authService: AuthService,
         private commentService: CommentService,
-        // private categoryService: CategoryService,
-        // private router: Router,
     ) {
         this.isLogged = this.authService.isLogged
     }
@@ -59,6 +56,10 @@ export class ArticleDetailComponent implements OnInit {
                 }
 
                 this.article = result as ArticleDetailType
+
+                if (this.isLogged) {
+                    this.getCommentActions()
+                }
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
@@ -130,6 +131,10 @@ export class ArticleDetailComponent implements OnInit {
                 } else {
                     this.article.comments = this.article.comments.concat(comments.comments)
                 }
+
+                if (this.isLogged) {
+                    this.getCommentActions()
+                }
             },
             error: (errorResponse: HttpErrorResponse) => {
                 if (errorResponse.error && errorResponse.error.message) {
@@ -144,5 +149,31 @@ export class ArticleDetailComponent implements OnInit {
     getMoreComments() {
         this.getComments(this.offset)
         this.offset += this.newCommentsCount
+    }
+
+    getCommentActions() {
+        this.commentService.getActionsForAllComments(this.article.id).subscribe({
+            next: (result: ActionForCommentType[] | DefaultResponseType) => {
+                if ((result as DefaultResponseType).error !== undefined) {
+                    throw new Error((result as DefaultResponseType).message)
+                }
+                this.commentsActionsForUser = result as ActionForCommentType[]
+
+                const commentActions: ActionForCommentType[] = result as ActionForCommentType[]
+                this.article.comments.forEach(comment => {
+                    const foundedCommetActions = commentActions.find(item => item.comment === comment.id)
+                    if (foundedCommetActions) {
+                        comment.actionForUser = foundedCommetActions.action
+                    }
+                })
+            },
+            error: (errorResponse: HttpErrorResponse) => {
+                if (errorResponse.error && errorResponse.error.message) {
+                    this._snackBar.open(errorResponse.error.message, 'Закрыть')
+                } else {
+                    this._snackBar.open('Ошибка получения комментариев', 'Закрыть')
+                }
+            }
+        })
     }
 }

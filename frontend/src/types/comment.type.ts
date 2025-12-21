@@ -1,3 +1,5 @@
+import {CommentActionEnum} from "./comment-action.enum";
+
 export type CommentType = {
     id: string,
     text: string,
@@ -7,5 +9,6 @@ export type CommentType = {
     user: {
         id: string,
         name: string,
-    }
+    },
+    actionForUser?: CommentActionEnum,
 }
