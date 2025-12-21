@@ -15,7 +15,7 @@ import {UserType} from "../../../../types/user.type";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    userInfo: UserType | null = null
+    isShowPassword: boolean = false
 
     loginForm = this.fb.group({
         email: ['', [Validators.email, Validators.required]],
@@ -103,5 +103,9 @@ export class LoginComponent implements OnInit {
                 }
             }
         })
+    }
+
+    togglePassword(): void {
+        this.isShowPassword = !this.isShowPassword
     }
 }

@@ -19,6 +19,26 @@
             .input {
                 width: 422px;
             }
+
+            &.password-input {
+                @include d-flex;
+                position: relative;
+
+                svg {
+                    position: absolute;
+                    right: 10px;
+                    width: 56px;
+                    height: 56px;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    fill: #BEBEBE;
+
+                    &:hover {
+                        fill: $light-blue-color;
+                    }
+                }
+            }
         }
 
         .auth-checkbox {

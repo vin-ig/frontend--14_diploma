@@ -14,6 +14,7 @@ import {UserService} from "../../../shared/services/user.service";
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+    isShowPassword: boolean = false
     signupForm = this.fb.group({
         name: ['', [Validators.required, Validators.pattern(/^([А-ЯЁ][а-яё]*(?:\s[А-ЯЁ][а-яё]*)*)$/)]],
         email: ['', [Validators.email, Validators.required]],
@@ -71,5 +72,9 @@ export class SignupComponent implements OnInit {
                 }
             },
         })
+    }
+
+    togglePassword(): void {
+        this.isShowPassword = !this.isShowPassword
     }
 }
