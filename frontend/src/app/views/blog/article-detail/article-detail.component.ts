@@ -5,7 +5,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {DefaultResponseType} from "../../../../types/default-response.type";
-import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {environment} from "../../../../environments/environment";
 import {ArticleType} from "../../../../types/article.type";
 import {AuthService} from "../../../core/auth/auth.service";
