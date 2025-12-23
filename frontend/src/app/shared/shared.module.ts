@@ -6,13 +6,15 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
 import {RouterModule} from "@angular/router";
 import { LoaderComponent } from './components/loader/loader.component';
 import {NgxMaskModule} from "ngx-mask";
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 @NgModule({
     declarations: [
         ModalComponent,
         ArticleCardComponent,
-        LoaderComponent
+        LoaderComponent,
+        SafeHtmlPipe
     ],
     imports: [
         CommonModule,
@@ -25,6 +27,7 @@ import {NgxMaskModule} from "ngx-mask";
         ModalComponent,
         ArticleCardComponent,
         LoaderComponent,
+        SafeHtmlPipe,
     ]
 })
 export class SharedModule {

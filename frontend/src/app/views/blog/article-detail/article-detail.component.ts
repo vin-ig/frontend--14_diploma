@@ -37,7 +37,6 @@ export class ArticleDetailComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private articleService: ArticleService,
         private _snackBar: MatSnackBar,
-        private sanitizer: DomSanitizer,
         private authService: AuthService,
         private commentService: CommentService,
         private loaderService: LoaderService,
@@ -96,10 +95,6 @@ export class ArticleDetailComponent implements OnInit {
                 }
             }
         });
-    }
-
-    safeHtml(text: string): SafeHtml {
-        return this.sanitizer.bypassSecurityTrustHtml(text);
     }
 
     postComment(): void {

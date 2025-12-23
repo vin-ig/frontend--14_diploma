@@ -61,7 +61,6 @@ export class MainComponent implements OnInit {
     popularArticles: ArticleType[] = [];
 
     constructor(
-        private sanitizer: DomSanitizer,
         private articleService: ArticleService,
         private modalService: ModalService,
     ) {
@@ -80,10 +79,6 @@ export class MainComponent implements OnInit {
                 }
             },
         });
-    }
-
-    safeTitle(text: string): SafeHtml {
-        return this.sanitizer.bypassSecurityTrustHtml(text);
     }
 
     serviceRequest(modalType: ModalTypeEnum, serviceName?: string) {

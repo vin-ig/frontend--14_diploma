@@ -11,7 +11,7 @@
     </div>
 
     <div class="article-content">
-        <div class="article-text" [innerHTML]="safeHtml(article.text)"></div>
+        <div class="article-text" [innerHTML]="article.text | safeHtml"></div>
         <div class="article-aside" *ngIf="relatedArticles.length > 0">
             <div class="article-aside-title">Читайте также:</div>
             <div class="article-aside-cards">
