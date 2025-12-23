@@ -1,0 +1,91 @@
+@import "../../../../assets/styles/variables";
+
+@media screen and (max-width: 1239px) {
+    .header {
+        .container {
+            .header-menu {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 1023px) {
+    .header {
+        .container {
+            flex-wrap: wrap;
+
+            .header-menu {
+                order: 4;
+                flex: 1 0 100%;
+
+                ul {
+                    justify-content: space-around;
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 599px) {
+    .header {
+        .container {
+            position: relative;
+
+            .burger {
+                display: block;
+                width: 40px;
+            }
+
+            .header-menu, .header-contacts {
+                display: none;
+            }
+
+            .header-menu {
+                background: #B9D5FD;
+                border-radius: 5px;
+                position: absolute;
+                top: 50px;
+                right: 20px;
+                z-index: 5;
+
+                ul {
+                    padding: 20px 60px;
+                    flex-direction: column;
+                    gap: 40px;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 424px) {
+    .header {
+        .container {
+            gap: 5px;
+
+            .burger {
+                flex: 1 0 100%;
+                height: 30px;
+                border: 1px solid $light-blue-color;
+                border-radius: 3px;
+
+                svg {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            .header-menu {
+                top: 95px;
+                right: 50%;
+                transform: translateX(50%);
+                width: 90%;
+            }
+        }
+    }
+}

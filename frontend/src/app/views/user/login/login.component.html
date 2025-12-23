@@ -20,9 +20,7 @@
                 </div>
             </div>
 
-            <div class="auth-button">
-                <button class="button" [disabled]="loginForm.invalid" (click)="login()">Войти</button>
-            </div>
+            <button class="button" [disabled]="loginForm.invalid" (click)="login()">Войти</button>
 
             <div class="auth-link">
                 Нет аккаунта? <a routerLink="/signup">Пройдите регистрацию</a>

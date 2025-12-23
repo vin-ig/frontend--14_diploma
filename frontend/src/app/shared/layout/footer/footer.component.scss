@@ -79,3 +79,37 @@
         }
     }
 }
+
+
+@media screen and (max-width: 1239px) {
+    .footer {
+        .container {
+            .footer-middle {
+                flex-wrap: wrap;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .footer {
+        .container {
+            .footer-top {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 459px) {
+    .footer {
+        .container {
+            .footer-top {
+                .footer-menu {
+                    display: none;
+                }
+            }
+        }
+    }
+}

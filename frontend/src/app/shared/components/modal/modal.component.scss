@@ -28,6 +28,8 @@
         }
 
         .auth-form {
+            @include auth-form;
+
             padding: 0 50px;
 
             .auth-title {
@@ -49,6 +51,38 @@
                     padding: 10px 20px;
                     width: auto;
                 }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .modal-overlay .modal {
+        width: 100%;
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 574px) {
+    .modal-overlay .modal {
+        display: block;
+        height: auto;
+
+        .auth-form {
+            padding: 50px 20px;
+            margin: 0;
+
+            .auth-title {
+                font-size: 28px;
+            }
+
+            .auth-inputs {
+                width: 100%;
+            }
+
+            .button {
+                width: 100%;
             }
         }
     }

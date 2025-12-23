@@ -7,10 +7,11 @@
 
     .container {
         @include d-flex-between;
+        gap: 20px;
 
         .logo {
             width: 85px;
-            //margin-right: 100px;
+            flex-shrink: 0;
 
             img {
                 max-width: 100%;
@@ -42,11 +43,13 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             color: $light-blue-color;
+            flex-shrink: 0;
         }
 
         .header-actions {
             //width: 230px;
             margin-left: 20px;
+            flex-shrink: 0;
             @include d-flex;
 
             svg {
@@ -56,6 +59,10 @@
             a {
                 color: $dark-blue-text-color;
             }
+        }
+
+        .burger {
+            display: none;
         }
     }
 }

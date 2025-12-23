@@ -1,86 +1,67 @@
 @import "variables";
 @import "mixins";
 
-.auth-form {
-    margin-top: 120px;
-    margin-bottom: 120px;
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 
-    .auth-title {
-        @include head-lora-36;
-        margin-bottom: 40px;
+    .auth-form {
+        @include auth-form;
     }
 
-    .auth-inputs {
-        margin-bottom: 40px;
+    .page-image {
+        margin-top: 123px;
 
-        .auth-input {
-            margin-bottom: 5px;
-
-            .input {
-                width: 422px;
-            }
-
-            &.password-input {
-                @include d-flex;
-                position: relative;
-
-                svg {
-                    position: absolute;
-                    right: 10px;
-                    width: 56px;
-                    height: 56px;
-                    padding: 10px;
-                    box-sizing: border-box;
-                    cursor: pointer;
-                    fill: #BEBEBE;
-
-                    &:hover {
-                        fill: $light-blue-color;
-                    }
-                }
-            }
-        }
-
-        .auth-checkbox {
-            max-width: 422px;
-            display: flex;
-            align-items: baseline;
-            padding-top: 5px;
-
-            input {
-                margin: 0;
-            }
-
-            label {
-                font-size: 14px;
-                line-height: 130%;
-                margin-left: 10px;
-
-                a {
-                    color: $light-blue-color;
-                    text-decoration: underline;
-                }
-            }
+        img {
+            width: 100%;
         }
     }
+}
 
-    .auth-button {
-        margin-top: 40px;
 
-        button.button {
-            width: 422px;
-            font-size: 16px;
+@media screen and (max-width: 1023px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .page-image {
+            margin: 0 auto;
+            order: 1;
+        }
+
+        .auth-form {
+            margin-top: 0;
+            order: 2;
         }
     }
+}
 
-    .auth-link {
-        margin-top: 10px;
-        font-size: 14px;
-        color: #1E1A2B;
+@media screen and (max-width: 499px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
 
-        a {
-            margin-left: 7px;
-            color: $light-blue-color;
+        .page-image {
+            margin: 0 auto;
+            order: 1;
+        }
+
+        .auth-form {
+            margin-top: 0;
+            order: 2;
+
+            .auth-title {
+                font-size: 28px;
+            }
+
+            .auth-inputs {
+                width: 100%;
+            }
+
+            .button {
+                width: 100%;
+            }
         }
     }
 }

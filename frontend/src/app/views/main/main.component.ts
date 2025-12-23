@@ -11,7 +11,7 @@ import {ModalService} from "../../shared/services/modal.service";
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
-    styleUrls: ['./main.component.scss']
+    styleUrls: ['./main.component.scss', './main-adaptive.component.scss']
 })
 export class MainComponent implements OnInit {
     carouselItems = StaticData.carouselItems;
@@ -46,13 +46,13 @@ export class MainComponent implements OnInit {
             0: {
                 items: 1
             },
-            400: {
+            880: {
+                items: 1
+            },
+            1024: {
                 items: 2
             },
-            740: {
-                items: 3
-            },
-            940: {
+            1240: {
                 items: 3
             }
         },

@@ -87,6 +87,7 @@
 
             .services-items {
                 @include d-flex-between;
+                flex-wrap: wrap;
                 gap: 26px;
 
                 .service-item {
@@ -138,9 +139,14 @@
         .about {
             margin-bottom: 120px;
             @include d-flex-between;
+            gap: 20px;
 
-            .about-image img {
-                width: 100%;
+            .about-image {
+                min-width: 300px;
+
+                img {
+                    width: 100%;
+                }
             }
 
             .about-content {
@@ -219,6 +225,7 @@
             .popular-articles-cards {
                 margin-bottom: 40px;
                 @include d-flex-between;
+                flex-wrap: wrap;
                 gap: 24px;
             }
 

@@ -29,6 +29,12 @@ a {
     margin: 0 auto;
 }
 
+@media screen and (max-width: 1239px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
 .input {
     box-sizing: border-box;
     padding: 17px 20px;
