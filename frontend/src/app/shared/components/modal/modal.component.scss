@@ -38,19 +38,17 @@
             }
 
             .auth-inputs {
-                margin-bottom: 0;
+                margin: 0 auto;
             }
 
             .auth-link {
                 font-weight: 500;
             }
 
-            .auth-button {
-                .button.small-button {
-                    font-size: 12px;
-                    padding: 10px 20px;
-                    width: auto;
-                }
+            .button.small-button {
+                font-size: 12px;
+                padding: 10px 20px;
+                width: auto;
             }
         }
     }

@@ -9,16 +9,16 @@ import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {CommentActionEnum} from "../../../../types/comment-action.enum";
 
 describe('Comment Component', () => {
-    let commentComponent: CommentComponent
-    let fixture: ComponentFixture<CommentComponent>
-    let comment: CommentType
-    const defaultLikesCount = 89
-    const defaultDislikesCount = 89
+    let commentComponent: CommentComponent;
+    let fixture: ComponentFixture<CommentComponent>;
+    let comment: CommentType;
+    const defaultLikesCount = 89;
+    const defaultDislikesCount = 89;
 
     beforeEach(() => {
-        const authServiceSpy = jasmine.createSpyObj('AuthService', ['isLogged'], {isLogged$: of(true)})
-        const _snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open'])
-        const commentServiceSpy = jasmine.createSpyObj('CommentService', ['applyAction'])
+        const authServiceSpy = jasmine.createSpyObj('AuthService', ['isLogged'], {isLogged$: of(true)});
+        const _snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+        const commentServiceSpy = jasmine.createSpyObj('CommentService', ['applyAction']);
 
         TestBed.configureTestingModule({
             declarations: [CommentComponent],
@@ -28,9 +28,9 @@ describe('Comment Component', () => {
                 {provide: CommentService, useValue: commentServiceSpy},
             ],
             schemas: [NO_ERRORS_SCHEMA],
-        })
-        fixture = TestBed.createComponent(CommentComponent)
-        commentComponent = fixture.componentInstance
+        });
+        fixture = TestBed.createComponent(CommentComponent);
+        commentComponent = fixture.componentInstance;
         comment = {
             id: 'string',
             text: 'string',
@@ -41,56 +41,56 @@ describe('Comment Component', () => {
                 id: 'string',
                 name: 'string',
             },
-        }
+        };
 
-        commentComponent.comment = comment
-    })
+        commentComponent.comment = comment;
+    });
 
     it('should set new value from parent component', () => {
-        commentComponent.comment.likesCount = 5
-        fixture.detectChanges()
-        expect(commentComponent.comment.likesCount).toBe(5)
-    })
+        commentComponent.comment.likesCount = 5;
+        fixture.detectChanges();
+        expect(commentComponent.comment.likesCount).toBe(5);
+    });
 
     it('should be visible user reaction', () => {
-        const componentElement: HTMLElement = fixture.nativeElement
-        const likeSvgElement: HTMLElement | null = componentElement.querySelector('.comment-footer-item:first-child svg')
-        let computedStyle = window.getComputedStyle(likeSvgElement!).stroke
+        const componentElement: HTMLElement = fixture.nativeElement;
+        const likeSvgElement: HTMLElement | null = componentElement.querySelector('.comment-footer-item:first-child svg');
+        let computedStyle = window.getComputedStyle(likeSvgElement!).stroke;
 
-        expect(computedStyle).toBe('rgb(7, 23, 57)')
+        expect(computedStyle).toBe('rgb(7, 23, 57)');
 
-        commentComponent.comment.actionForUser = CommentActionEnum.like
-        fixture.detectChanges()
-        computedStyle = window.getComputedStyle(likeSvgElement!).stroke
+        commentComponent.comment.actionForUser = CommentActionEnum.like;
+        fixture.detectChanges();
+        computedStyle = window.getComputedStyle(likeSvgElement!).stroke;
 
-        expect(computedStyle).toBe('rgb(112, 159, 220)')
-    })
+        expect(computedStyle).toBe('rgb(112, 159, 220)');
+    });
 
     it('should be applied acton', () => {
-        let commentServiceSpy = TestBed.inject(CommentService) as jasmine.SpyObj<CommentService>
-        commentServiceSpy.applyAction.and.returnValue(of({error: false, message: 'ok'}))
+        let commentServiceSpy = TestBed.inject(CommentService) as jasmine.SpyObj<CommentService>;
+        commentServiceSpy.applyAction.and.returnValue(of({error: false, message: 'ok'}));
 
         // Пока нет реакций
-        expect(commentComponent.comment.actionForUser).toBeUndefined()
-        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount)
-        expect(commentComponent.comment.likesCount).toBe(defaultDislikesCount)
+        expect(commentComponent.comment.actionForUser).toBeUndefined();
+        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount);
+        expect(commentComponent.comment.likesCount).toBe(defaultDislikesCount);
 
         // Ставим лайк
-        commentComponent.applyAction(CommentActionEnum.like)
-        expect(commentComponent.comment.actionForUser).toBe(CommentActionEnum.like)
-        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount + 1)
-        expect(commentComponent.comment.dislikesCount).toBe(defaultDislikesCount)
+        commentComponent.applyAction(CommentActionEnum.like);
+        expect(commentComponent.comment.actionForUser).toBe(CommentActionEnum.like);
+        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount + 1);
+        expect(commentComponent.comment.dislikesCount).toBe(defaultDislikesCount);
 
         // Ставим дизлайк
-        commentComponent.applyAction(CommentActionEnum.dislike)
-        expect(commentComponent.comment.actionForUser).toBe(CommentActionEnum.dislike)
-        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount)
-        expect(commentComponent.comment.dislikesCount).toBe(defaultDislikesCount + 1)
+        commentComponent.applyAction(CommentActionEnum.dislike);
+        expect(commentComponent.comment.actionForUser).toBe(CommentActionEnum.dislike);
+        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount);
+        expect(commentComponent.comment.dislikesCount).toBe(defaultDislikesCount + 1);
 
         // Снимаем дизлайк
-        commentComponent.applyAction(CommentActionEnum.dislike)
-        expect(commentComponent.comment.actionForUser).toBeUndefined()
-        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount)
-        expect(commentComponent.comment.dislikesCount).toBe(defaultDislikesCount)
-    })
-})
+        commentComponent.applyAction(CommentActionEnum.dislike);
+        expect(commentComponent.comment.actionForUser).toBeUndefined();
+        expect(commentComponent.comment.likesCount).toBe(defaultLikesCount);
+        expect(commentComponent.comment.dislikesCount).toBe(defaultDislikesCount);
+    });
+});

@@ -7,63 +7,39 @@
             </svg>
         </div>
 
-        <div [ngSwitch]="modalType">
-            <div *ngSwitchCase="modalTypes.order" class="auth-form">
-                <div class="auth-title">Заявка на услугу</div>
+        <div class="auth-form" *ngIf="modalType !== modalTypes.success">
+            <div class="auth-title">
+                {{ modalType === modalTypes.order ? 'Заявка на услугу' : 'Закажите бесплатную консультацию!'}}
+            </div>
 
-                <div class="auth-inputs">
-                    <div class="auth-input">
-                        <select class="input" formControlName="category"
-                        [ngStyle]="{'border-color': category?.invalid && (category?.dirty || category?.touched) ? 'red' : ''}">
-                            <option [ngValue]="null" selected hidden>Категория</option>
-                            <option *ngFor="let service of services" [ngValue]="service.title">{{ service.title }}</option>
-                        </select>
-                    </div>
-                    <div class="auth-input">
-                        <input type="text" class="input" placeholder="Ваше имя" formControlName="name"
-                        [ngStyle]="{'border-color': name?.invalid && (name?.dirty || name?.touched) ? 'red' : ''}">
-                    </div>
-                    <div class="auth-input">
-                        <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
-                        mask="+0 (000) 000-00-00"
-                        [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
-                    </div>
+            <div class="auth-inputs">
+                <div class="auth-input" *ngIf="modalType === modalTypes.order">
+                    <select class="input" formControlName="category"
+                    [ngStyle]="{'border-color': category?.invalid && (category?.dirty || category?.touched) ? 'red' : ''}">
+                        <option [ngValue]="null" selected hidden>Категория</option>
+                        <option *ngFor="let service of services" [ngValue]="service.title">{{ service.title }}</option>
+                    </select>
                 </div>
-
-                <div class="auth-button">
-                    <button class="button" [disabled]="modalForm.invalid" (click)="submitContactForm()">Оставить заявку</button>
+                <div class="auth-input">
+                    <input type="text" class="input" placeholder="Ваше имя" formControlName="name"
+                    [ngStyle]="{'border-color': name?.invalid && (name?.dirty || name?.touched) ? 'red' : ''}">
+                </div>
+                <div class="auth-input">
+                    <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
+                    mask="+0 (000) 000-00-00"
+                    [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
                 </div>
             </div>
 
-            <div *ngSwitchCase="modalTypes.consult" class="auth-form">
-                <div class="auth-title">Закажите бесплатную консультацию!</div>
+            <button class="button" [disabled]="modalForm.invalid" (click)="submitContactForm()">
+                {{ modalType === modalTypes.order ? 'Оставить заявку' : 'Заказать консультацию'}}
+            </button>
+        </div>
 
-                <div class="auth-inputs">
-                    <div class="auth-input">
-                        <input type="text" class="input" placeholder="Ваше имя" formControlName="name"
-                        [ngStyle]="{'border-color': name?.invalid && (name?.dirty || name?.touched) ? 'red' : ''}">
-                    </div>
-                    <div class="auth-input">
-                        <input type="text" class="input" placeholder="Ваш номер телефона" formControlName="phone"
-                        mask="+0 (000) 000-00-00"
-                        [ngStyle]="{'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
-                    </div>
-                </div>
-
-                <div class="auth-button">
-                    <button class="button" [disabled]="modalForm.invalid" (click)="submitContactForm()">Заказать консультацию</button>
-                </div>
-            </div>
-
-            <div *ngSwitchCase="modalTypes.success" class="auth-form">
-                <div class="auth-title">Спасибо за вашу заявку!</div>
-
-                <div class="auth-link">Мы свяжемся с вами при первой же возможности.</div>
-
-                <div class="auth-button">
-                    <button class="button small-button" (click)="closeModal()">Окей</button>
-                </div>
-            </div>
+        <div class="auth-form" *ngIf="modalType === modalTypes.success">
+            <div class="auth-title">Спасибо за вашу заявку!</div>
+            <div class="auth-link">Мы свяжемся с вами при первой же возможности.</div>
+            <button class="button small-button" (click)="closeModal()">Окей</button>
         </div>
     </div>
 </section>

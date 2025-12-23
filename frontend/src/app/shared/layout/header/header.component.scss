@@ -21,7 +21,7 @@
         .header-menu {
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
-            color: $dark-blue-text-color;
+            color: $dark-blue-color;
             margin-right: 157px;
 
             ul {
@@ -33,7 +33,7 @@
                 a {
                     &:hover,
                     &.active {
-                        color: $light-blue-color;
+                        color: $blue-color;
                     }
                 }
             }
@@ -42,7 +42,7 @@
         .header-contacts {
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
-            color: $light-blue-color;
+            color: $blue-color;
             flex-shrink: 0;
         }
 
@@ -57,7 +57,7 @@
             }
 
             a {
-                color: $dark-blue-text-color;
+                color: $dark-blue-color;
             }
         }
 

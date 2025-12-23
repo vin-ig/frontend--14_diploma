@@ -1,11 +1,7 @@
 import {Component, ElementRef, HostListener, Input, OnInit, Renderer2, TemplateRef, ViewChild} from '@angular/core';
 import {AuthService} from "../../../core/auth/auth.service";
 import {UserService} from "../../services/user.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import {DefaultResponseType} from "../../../../types/default-response.type";
-import {UserType} from "../../../../types/user.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {LoginResponseType} from "../../../../types/login-response.type";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,9 +13,9 @@ export class HeaderComponent implements OnInit {
     isLogged: boolean = false;
     userName: string | null = null;
 
-    @ViewChild('headerMenu') headerMenu!: ElementRef
-    @ViewChild('headerContacts') headerContacts!: ElementRef
-    isOpenMenu: boolean = false
+    @ViewChild('headerMenu') headerMenu!: ElementRef;
+    @ViewChild('headerContacts') headerContacts!: ElementRef;
+    isOpenMenu: boolean = false;
 
     constructor(
         private authService: AuthService,
@@ -69,27 +65,27 @@ export class HeaderComponent implements OnInit {
         }
 
         if (this.isOpenMenu) {
-            this.isOpenMenu = false
-            this.rend.setStyle(this.headerMenu.nativeElement, 'display', 'none')
+            this.isOpenMenu = false;
+            this.rend.setStyle(this.headerMenu.nativeElement, 'display', 'none');
         } else {
-            const li = this.rend.createElement('li')
-            const headerContacts = this.headerContacts.nativeElement
-            const menuUl = this.headerMenu.nativeElement.querySelector('ul')
+            const li = this.rend.createElement('li');
+            const headerContacts = this.headerContacts.nativeElement;
+            const menuUl = this.headerMenu.nativeElement.querySelector('ul');
             if (!menuUl.querySelector('li .header-contacts')) {
                 this.rend.appendChild(li, this.headerContacts.nativeElement);
-                this.rend.appendChild(menuUl, li)
+                this.rend.appendChild(menuUl, li);
             }
 
-            this.rend.setStyle(this.headerMenu.nativeElement, 'display', 'block')
-            this.rend.setStyle(headerContacts, 'display', 'block')
-            this.isOpenMenu = true
+            this.rend.setStyle(this.headerMenu.nativeElement, 'display', 'block');
+            this.rend.setStyle(headerContacts, 'display', 'block');
+            this.isOpenMenu = true;
         }
     }
 
     @HostListener('document:click')
     click() {
         if (this.isOpenMenu) {
-            this.toggleMenu()
+            this.toggleMenu();
         }
     }
 }

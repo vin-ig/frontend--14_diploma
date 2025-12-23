@@ -81,6 +81,6 @@ export class MainComponent implements OnInit {
     }
 
     serviceRequest(modalType: ModalTypeEnum, serviceName?: string) {
-        this.modalService.show(ModalTypeEnum.order, serviceName);
+        this.modalService.show(modalType, serviceName);
     }
 }

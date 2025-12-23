@@ -23,12 +23,12 @@
                 flex-wrap: wrap;
 
                 .applied-filter {
-                    border: 2px solid $light-blue-color;
+                    border: 2px solid $blue-color;
                     border-radius: 5px;
                     box-sizing: border-box;
                     padding: 8px 20px;
                     font-size: 16px;
-                    color: $light-blue-color;
+                    color: $blue-color;
                     @include d-flex;
                     gap: 8px;
 
@@ -76,11 +76,11 @@
                         }
 
                         &.active {
-                            color: $dark-blue-text-color;
+                            color: $dark-blue-color;
                         }
 
                         &:hover {
-                            color: $dark-blue-text-color;
+                            color: $dark-blue-color;
                         }
                     }
                 }
@@ -90,7 +90,7 @@
 
                     .filter-menu-head {
                         width: 100%;
-                        background: #B9D5FD;
+                        background: $light-blue-color;
                         border-radius: 5px 5px 0 0;
                         padding: 12px 23px;
 
@@ -125,10 +125,10 @@
 
                 .pagination-page {
                     font-size: 20px;
-                    color: $dark-blue-text-color;
+                    color: $dark-blue-color;
 
                     &.active {
-                        color: #B9D5FD;
+                        color: $light-blue-color;
                         cursor: default;
                     }
                 }

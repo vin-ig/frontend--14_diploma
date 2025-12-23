@@ -2,7 +2,7 @@
 @import "../../../../assets/styles/mixins";
 
 .footer {
-    background-color: #B9D5FD;
+    background-color: $light-blue-color;
     padding-top: 40px;
     padding-bottom: 54px;
     font-family: 'Montserrat', sans-serif;
@@ -45,13 +45,13 @@
 
             .footer-middle-item-head {
                 font-weight: 500;
-                color: $light-blue-color;
+                color: $blue-color;
                 margin-bottom: 10px;
             }
 
             .footer-middle-item-body {
                 font-weight: 400;
-                color: $dark-blue-text-color;
+                color: $dark-blue-color;
                 max-width: 260px;
                 display: flex;
 
@@ -61,6 +61,14 @@
 
                 &.social-media {
                     gap: 12px;
+
+                    svg {
+                        fill: $dark-blue-color;
+
+                        &:hover{
+                            fill: white;
+                        }
+                    }
                 }
 
                 .button {
@@ -75,7 +83,7 @@
 
         .footer-bottom {
             font-weight: 400;
-            color: $light-blue-color;
+            color: $blue-color;
         }
     }
 }

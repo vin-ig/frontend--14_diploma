@@ -5,8 +5,8 @@ import {TestBed} from "@angular/core/testing";
 import {environment} from "../../../environments/environment";
 
 describe('Article Service', () => {
-    let articleService: ArticleService
-    let httpServiceSpy: jasmine.SpyObj<HttpClient>
+    let articleService: ArticleService;
+    let httpServiceSpy: jasmine.SpyObj<HttpClient>;
     const article = {
         id: 'string',
         title: 'string',
@@ -15,26 +15,26 @@ describe('Article Service', () => {
         date: 'string',
         category: 'string',
         url: 'string'
-    }
+    };
 
     beforeEach(() => {
-        httpServiceSpy = jasmine.createSpyObj('HttpClient', ['get'])
-        httpServiceSpy.get.and.returnValue(of([article]))
+        httpServiceSpy = jasmine.createSpyObj('HttpClient', ['get']);
+        httpServiceSpy.get.and.returnValue(of([article]));
 
         TestBed.configureTestingModule({
             providers: [
                 ArticleService,
                 {provide: HttpClient, useValue: httpServiceSpy}
             ]
-        })
-        articleService = TestBed.inject(ArticleService)
-    })
+        });
+        articleService = TestBed.inject(ArticleService);
+    });
 
     it('should make http request for article data', (done: DoneFn) => {
         articleService.getPopularArticles().subscribe((result) => {
-            expect(httpServiceSpy.get).toHaveBeenCalledOnceWith(environment.api + 'articles/top')
-            expect(result).toEqual([article])
-            done()
-        })
-    })
-})
+            expect(httpServiceSpy.get).toHaveBeenCalledOnceWith(environment.api + 'articles/top');
+            expect(result).toEqual([article]);
+            done();
+        });
+    });
+});
